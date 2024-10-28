@@ -1,0 +1,69 @@
+.app {
+  height: 1080px;
+  width: 1920px;
+}
+
+.prayer-box {
+  position: absolute;
+  height: 534px;
+  width: 381px;
+  margin-left: 1539px;
+  margin-top: 546px;
+}
+
+.overhead-box {
+  position: absolute;
+  height: 52px;
+  width: 48px;
+  left: 916px;
+  top: 442px;
+}
+
+.melee-prayer-button {
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  left: 1611px;
+  top: 631px;
+  z-index: 102;
+
+}
+
+.mage-prayer-button {
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  left: 1611px;
+  top: 689px;
+  z-index: 102;
+}
+
+.range-prayer-button{
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  left: 1672px;
+  top: 689px;
+  z-index: 102;
+}
+
+.prayer-activated-circle {
+  border: 1px solid #c3ac6d;
+  background-color: #c3ac6d;
+  opacity: 0.6;
+  border-radius: 50%;
+}
+
+.tick-count {
+  position: absolute;
+  color: white;
+  top: 500px;
+  left: 1000px;
+}
+
+.levi-attacks {
+  height: 1080px;
+  width: 1920px;
+  position: absolute;
+  z-index: 101;
+}
