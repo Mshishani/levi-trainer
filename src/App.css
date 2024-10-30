@@ -26,7 +26,7 @@
   left: 1611px;
   top: 631px;
   z-index: 102;
-
+  user-select: none;
 }
 
 .mage-prayer-button {
@@ -36,6 +36,7 @@
   left: 1611px;
   top: 689px;
   z-index: 102;
+  user-select: none;
 }
 
 .range-prayer-button{
@@ -45,6 +46,7 @@
   left: 1672px;
   top: 689px;
   z-index: 102;
+  user-select: none;
 }
 
 .prayer-activated-circle {
@@ -58,7 +60,8 @@
   position: absolute;
   color: white;
   top: 500px;
-  left: 1000px;
+  left: 500px;
+  font-size: 25px;
 }
 
 .levi-attacks {
