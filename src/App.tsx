@@ -42,8 +42,7 @@ function App() {
 
     const [prayerPercentage, setPrayerPercentage] = useState<number>(100)
     const [numberOfMistakes, setNumberOfMistakes] = useState<number>(0)
-
-    const [currentOverHead, setCurrentOverHead] = useState<string>()
+    const [totalAttacks, setTotalAttacks] = useState<number>(0)
 
 
     const determineOverhead = () => {
@@ -69,9 +68,7 @@ function App() {
     useEffect(() => {
         const interval = setInterval(() => {
             setTick((prevTick) => prevTick + 1);
-
-            // leviSounds[rand]()
-        }, 1600);
+        }, 600);
 
         return () => clearInterval(interval);
     }, []);
@@ -83,26 +80,26 @@ function App() {
         [undefined, "No attack"]
     ])
 
+    const leviAttackStartingTick  = 3;
     useEffect(() => {
-        if (tick > 5) {
+        if (tick > leviAttackStartingTick) {
             setLeviPreviousAttack(()=> leviCurrentAttack)
             const rand = Math.floor(Math.random()*3)
             setLeviCurrentAttack(()=> leviAttacks[rand]);
+            setTotalAttacks((prev) => ++prev)
+            leviSounds[rand]()
 
-            if (tick > 7){
-                if (leviAttackMap.get(leviPreviousAttack) === determineOverhead()) console.log("Correct")
-                else console.log("X")
+            if (tick > leviAttackStartingTick + 2){
+                if (leviAttackMap.get(leviPreviousAttack) !== determineOverhead()) setNumberOfMistakes((prev)=> ++prev)
             }
         }
         if (actionQueue.length > 0) {
             actionQueue.forEach((action) => action());
             setActionQueue([]);
         }
-    }, [tick]);
 
-    useEffect(() => {
-        // console.log(`Prayer = ${overHeadPrayerMap.get(determineOverhead())}, Levi attack = ${leviAttackMap.get(leviCurrentAttack)}`);
-    }, [leviCurrentAttack]);
+        setPrayerPercentage(()=> (((totalAttacks - numberOfMistakes) / totalAttacks) * 100))
+    }, [tick]);
 
     const toggleMeleePrayer = () => {
 
@@ -143,8 +140,12 @@ function App() {
                      onClick={toggleRangePrayer}></div>
                 <div className={"overhead-box"} style={{backgroundImage: `url(${determineOverhead()})`}}/>
                 <div className={"prayer-box"} style={{backgroundImage: `url(${prayerBookAllOffSmall})`}}></div>
-                <div className={"tick-count"}>Tick Count: {tick}</div>
                 <div className={"levi-attacks"} style={{backgroundImage: `url(${leviCurrentAttack})`}}/>
+                <div className={"tick-count"}>
+                    <p>Attacks: {totalAttacks}</p>
+                    <p>Mistakes: {numberOfMistakes}</p>
+                    <p>Success Rate: {prayerPercentage.toFixed(2)}</p>
+                </div>
             </div>
         </>
     );
